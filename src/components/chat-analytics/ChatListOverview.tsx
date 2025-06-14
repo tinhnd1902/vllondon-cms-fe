@@ -105,8 +105,6 @@ const ChatListOverview: React.FC<ChatListOverviewProps> = ({
         }
     }
 
-    console.log('filteredChats', filteredChats);
-
     return (
         <>
             <ComponentCard title="Bộ lọc" titleSize="text-2xl">
