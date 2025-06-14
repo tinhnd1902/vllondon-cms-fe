@@ -1,8 +1,8 @@
 export enum SentimentStatus {
-    POSITIVE,
-    NEUTRAL,
-    NEGATIVE,
-    NONE = "none"
+    POSITIVE = 'POSITIVE',
+    NEUTRAL= 'NEUTRAL',
+    NEGATIVE = 'NEGATIVE',
+    NONE = 'NONE'
 }
 
 export enum ConversationForm {
@@ -60,5 +60,6 @@ export interface ConversationResponse {
     sessionId: string;
     sentiment: SentimentStatus | null;
     conversationTopic: string | null;
+    conversatioNickname: string | null;
     metaData: CrispMetaData[];
 }

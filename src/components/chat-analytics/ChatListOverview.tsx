@@ -53,7 +53,6 @@ const ChatListOverview: React.FC<ChatListOverviewProps> = ({
                     ? msg.content.toLowerCase().includes(searchTerm.toLowerCase())
                     : JSON.stringify(msg.content).toLowerCase().includes(searchTerm.toLowerCase())
             );
-
         return matchesFilter && matchesProduct && matchesSearch;
     });
 
@@ -106,6 +105,8 @@ const ChatListOverview: React.FC<ChatListOverviewProps> = ({
         }
     }
 
+    console.log('filteredChats', filteredChats);
+
     return (
         <>
             <ComponentCard title="Bộ lọc" titleSize="text-2xl">
@@ -153,6 +154,7 @@ const ChatListOverview: React.FC<ChatListOverviewProps> = ({
                     </div>
                 </div>
             </ComponentCard>
+
 
             <div className="grid lg:grid-cols-2 gap-6">
                 {/* Chat List */}

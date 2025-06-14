@@ -32,6 +32,8 @@ export default function ChatAnalyticsPage() {
 
     const updateStatisticOVerview = useCallback(() => {
         const totalStatisfied = conversations.filter((res) => res.sentiment == SentimentStatus.POSITIVE).length;
+        const totalNotStatisfied = conversations.filter((res) => res.sentiment == SentimentStatus.NEGATIVE).length;
+        const totalNone = conversations.filter((res) => res.sentiment === null).length;
         const total = conversations.length;
         const data: StatisticItem[] = [
             {
@@ -43,11 +45,11 @@ export default function ChatAnalyticsPage() {
                 type: StatisticType.SATISFIED
             },
             {
-                value: (total - totalStatisfied).toString(),
+                value: totalNotStatisfied.toString(),
                 type: StatisticType.NOT_SATISFIED
             },
             {
-                value: `${(totalStatisfied / total)}%`,
+                value: `~${Math.round(((+totalStatisfied / (+total - +totalNone))) * 100)}%`,
                 type: StatisticType.SATISFACTION_RATE
             }
         ]
@@ -72,7 +74,8 @@ export default function ChatAnalyticsPage() {
     const updateChatList = useCallback(() => {
         const data: Conversation[] = conversations
             .map((res) => {
-                let customer = `User${res.id}`;
+                // let customer = `User${res.id}`;
+                let customer = `${res.conversatioNickname}`;
                 const messsages = res.metaData.map((chat) => {
                     if (chat.user && chat.from === ConversationForm.USER) {
                         customer = chat.user.nickname;
