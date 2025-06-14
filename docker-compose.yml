@@ -1,0 +1,13 @@
+services:
+  app:
+    container_name: vllondon-cms-fe
+    image: vllondon-cms-fe:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+    network_mode: host
