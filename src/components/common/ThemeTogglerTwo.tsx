@@ -10,7 +10,7 @@ export default function ThemeTogglerTwo() {
 
   const flagIcon = () => {
     const isEnglish = language === Languages.en.code;
-    return isEnglish ? Languages.en.image : Languages.vi.image;
+    return isEnglish ? Languages.vi.image : Languages.en.image;
   }
 
   const handleLanguageChange = () => {

@@ -11,5 +11,44 @@
         "password": "Password",
         "enter_password": "Enter your password"
     },
+    "chat_analytics_page": {
+        "chat_list": "Chat List",
+        "statistics": "Statistics",
+        "satisfied": "Satisfied",
+        "not_satisfied": "Not Satisfied",
+        "not_satisfied_weekly": "Chat Not Satisfied (Weekly)",
+        "not_satisfied_monthly": "Chat Not Satisfied (Monthly)",
+        "satisfaction_distribution": "Satisfaction Distribution"
+    },
+    "statistics_table": {
+        "title": "Statistics by Product",
+        "filter": "Filter",
+        "see_all": "See all",
+        "product": "Product",
+        "total_chats": "Total Chats",
+        "unsatisfied_chats": "Unsatisfied Chats",
+        "unsatisfied_rate": "Unsatisfied Rate"
+    },
+    "chat_list_overview": {
+        "filter_title": "Filters",
+        "satisfaction_level": "Satisfaction Level",
+        "product": "Product",
+        "search": "Search",
+        "all": "All",
+        "satisfied": "Satisfied",
+        "neutral": "Neutral",
+        "unsatisfied": "Unsatisfied",
+        "undefined": "Undefined",
+        "all_products": "All Products",
+        "search_placeholder": "Search chats...",
+        "chat_list": "Chat List",
+        "total_conversations": "Total Conversations",
+        "chat_details": "Chat Details",
+        "select_chat_details": "Select a chat to view details",
+        "conversation_with": "Conversation with customer:",
+        "customer": "Customer",
+        "agent": "Agent",
+        "select_chat_message": "Select a conversation to view details"
+    },
     "notification": "Notification"
 }

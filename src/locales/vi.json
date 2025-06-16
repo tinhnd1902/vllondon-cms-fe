@@ -18,6 +18,44 @@
         "password": "Mật khẩu",
         "enter_password": "Nhập mật khẩu"
     },
-
+    "chat_analytics_page": {
+        "chat_list": "Danh sách Chat",
+        "statistics": "Thống kê",
+        "satisfied": "Hài lòng",
+        "not_satisfied": "Không hài lòng",
+        "not_satisfied_weekly": "Chat Không Hài Lòng (Theo Tuần)",
+        "not_satisfied_monthly": "Chat Không Hài Lòng (Theo Tháng)",
+        "satisfaction_distribution": "Phân Bổ Mức Độ Hài Lòng"
+    },
+    "statistics_table": {
+        "title": "Thống kê theo sản phẩm",
+        "filter": "Lọc",
+        "see_all": "Xem tất cả",
+        "product": "Sản phẩm",
+        "total_chats": "Tổng chat",
+        "unsatisfied_chats": "Chat không hài lòng",
+        "unsatisfied_rate": "Tỷ lệ không hài lòng"
+    },
+    "chat_list_overview": {
+        "filter_title": "Bộ lọc",
+        "satisfaction_level": "Mức độ hài lòng",
+        "product": "Sản phẩm",
+        "search": "Tìm kiếm",
+        "all": "Tất cả",
+        "satisfied": "Hài lòng",
+        "neutral": "Trung lập",
+        "unsatisfied": "Không hài lòng",
+        "undefined": "Chưa xác định",
+        "all_products": "Tất cả sản phẩm",
+        "search_placeholder": "Tìm kiếm chat...",
+        "chat_list": "Danh sách Chat",
+        "total_conversations": "Tổng số hội thoại",
+        "chat_details": "Chi tiết chat",
+        "select_chat_details": "Chọn một cuộc trò chuyện để xem chi tiết",
+        "conversation_with": "Hội thoại với khách hàng:",
+        "customer": "Khách hàng",
+        "agent": "Nhân viên",
+        "select_chat_message": "Chọn một cuộc hội thoại để xem chi tiết"
+    },
     "notification": "Thông báo"
 }

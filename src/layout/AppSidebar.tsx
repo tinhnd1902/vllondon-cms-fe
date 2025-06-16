@@ -8,6 +8,7 @@ import {
   ReportAnalyticsIcon,
   HorizontaLDots,
 } from "@/assets/icons/index";
+import Logo from "@/components/ui/logo/Logo";
 
 type NavItem = {
   name: string;
@@ -238,24 +239,7 @@ const AppSidebar: React.FC = () => {
         className={`py-8 flex  ${!isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
           }`}
       >
-        <Link href="/">
-          {isExpanded || isHovered || isMobileOpen ? (
-            <>
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">VL</span>
-                </div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                  VLLondon
-                </h2>
-              </div>
-            </>
-          ) : (
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">VL</span>
-            </div>
-          )}
-        </Link>
+        <Logo size="w-10 h-10" hiddenTitle={!(isExpanded || isHovered || isMobileOpen)} />
       </div>
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav className="mb-6">
