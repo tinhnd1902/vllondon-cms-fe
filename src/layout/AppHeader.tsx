@@ -8,7 +8,7 @@ import React, { useState, useEffect, useRef } from "react";
 import i18n from "@/locales/i18n";
 import { ViIcon, EnIcon } from "@/locales/icons"
 
-const Languages = {
+export const Languages = {
   vi: {
     image: <ViIcon />,
     code: "vi",
