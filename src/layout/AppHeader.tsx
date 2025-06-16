@@ -2,13 +2,12 @@
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 import UserDropdown from "@/components/header/UserDropdown";
 import { useSidebar } from "@/context/SidebarContext";
-import Image from "next/image";
-import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import i18n from "@/locales/i18n";
 import { ViIcon, EnIcon } from "@/locales/icons"
+import Logo from "@/components/ui/logo/Logo";
 
-const Languages = {
+export const Languages = {
   vi: {
     image: <ViIcon />,
     code: "vi",
@@ -26,7 +25,7 @@ const AppHeader: React.FC = () => {
 
   const flagIcon = () => {
     const isEnglish = language === Languages.en.code;
-    return isEnglish ? Languages.en.image : Languages.vi.image;
+    return isEnglish ? Languages.vi.image : Languages.en.image;
   }
 
   const handleLanguageChange = () => {
@@ -106,23 +105,9 @@ const AppHeader: React.FC = () => {
             )}
             {/* Cross Icon */}
           </button>
-
-          <Link href="/" className="lg:hidden">
-            <Image
-              width={154}
-              height={32}
-              className="dark:hidden"
-              src="./images/logo/logo.svg"
-              alt="Logo"
-            />
-            <Image
-              width={154}
-              height={32}
-              className="hidden dark:block"
-              src="./images/logo/logo-dark.svg"
-              alt="Logo"
-            />
-          </Link>
+          <div className="lg:hidden">
+            <Logo size="w-10 h-10" />
+          </div>
 
           <button
             onClick={toggleApplicationMenu}

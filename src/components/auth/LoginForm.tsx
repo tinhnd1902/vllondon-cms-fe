@@ -8,6 +8,7 @@ import AuthenService from "@/services/auth.service";
 import { LoginPayload } from "@/modules/auth/auth.module";
 import { appRouter } from "@/hooks/useAppRouter";
 import Toast, { ToastInfo, ToastVariant } from "../ui/toast/Toast";
+import { useTranslation } from 'react-i18next';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,6 +16,7 @@ export default function LoginForm() {
   const [formData, setFormData] = useState<LoginPayload>({ username: '', password: '' });
   const [isSubmit, setIsSubmit] = useState(false);
   const [toastInfo, setToastInfo] = useState<ToastInfo>({ show: false, message: '', variant: ToastVariant.SUCCESS });
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isSubmit) {
@@ -73,10 +75,10 @@ export default function LoginForm() {
         <div>
           <div className="mb-5 sm:mb-8">
             <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
-              Sign In
+              {t('login_page.title')}
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your username and password to sign in!
+              {t('login_page.message')}
             </p>
           </div>
           <div>
@@ -84,11 +86,11 @@ export default function LoginForm() {
               <div className="space-y-6">
                 <div>
                   <Label>
-                    Username <span className="text-error-500">*</span>{" "}
+                    {t('login_page.username')} <span className="text-error-500">*</span>{" "}
                   </Label>
                   <Input
                     name="username"
-                    placeholder="Username"
+                    placeholder={t('login_page.enter_username')}
                     type="text"
                     error={!!errorPayload.username}
                     hint={errorPayload.username}
@@ -98,13 +100,13 @@ export default function LoginForm() {
                 </div>
                 <div>
                   <Label>
-                    Password <span className="text-error-500">*</span>{" "}
+                    {t('login_page.password')} <span className="text-error-500">*</span>{" "}
                   </Label>
                   <div className="relative">
                     <Input
                       name="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
+                      placeholder={t('login_page.enter_password')}
                       error={!!errorPayload.password}
                       hint={errorPayload.password}
                       defaultValue={formData.password}
@@ -126,7 +128,7 @@ export default function LoginForm() {
                 </div>
                 <div>
                   <Button className="w-full" size="sm">
-                    Sign in
+                    {t('login_page.title')}
                   </Button>
                 </div>
               </div>
