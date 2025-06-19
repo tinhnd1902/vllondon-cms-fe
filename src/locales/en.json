@@ -50,5 +50,18 @@
         "agent": "Agent",
         "select_chat_message": "Select a conversation to view details"
     },
+    "crisp": {
+        "create_new": "Create",
+        "add_config": "Add New Configuration",
+        "identifier_code": "Identifier Code",
+        "key": "Key",
+        "config_info": "Configuration Information",
+        "config_list_info": "List of configured keys and websites",
+        "total_website": "Total Websites",
+        "created_date": "Created Date",
+        "action": "Action",
+        "create_success": "Successfully created configuration key!",
+        "create_failed": "Error! Key creation failed"
+    },
     "notification": "Notification"
 }

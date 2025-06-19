@@ -63,3 +63,32 @@ export interface ConversationResponse {
     conversatioNickname: string | null;
     metaData: CrispMetaData[];
 }
+
+export interface CrispWebsiteResponse {
+    id: string;
+    createdAt: string;
+    updatedAt?: string;
+    websiteId: string;
+    websiteName?: string;
+    websiteUrl?: string;
+}
+
+export interface CrispConfigResponse {
+    id: string;
+    createdAt: string;
+    updatedAt?: string;
+    crispTokenIdentifier: string;
+    crispTokenKey: string;
+    websites?: CrispWebsiteResponse[]
+}
+
+export interface CrispKeyPayload {
+    crispTokenIdentifier: string;
+    crispTokenKey: string;
+}
+
+export interface CrispWebsitePayload {
+    name: string;
+    domain: string;
+    websiteId: string;
+}

@@ -4,14 +4,13 @@ export interface BooleanResponse {
 }
 
 export interface MetaResponse {
-    itemCount: number;
-    totalItems: number;
-    itemsPerPage: number;
+    total: number;
+    page: number;
+    limit: number;
     totalPages: number;
-    currentPage: number;
 }
 
 export interface PaginatedResponse<T> {
-    items: T;
+    data: T;
     meta: MetaResponse;
 }

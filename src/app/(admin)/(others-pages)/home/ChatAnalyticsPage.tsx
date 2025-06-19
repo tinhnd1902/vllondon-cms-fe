@@ -104,7 +104,7 @@ export default function ChatAnalyticsPage() {
     }, [conversations]);
 
     const fetchAllConversations = async () => {
-        CrispService.getAllConversationRequest()
+        CrispService.getAllConversation()
             .then((response) => {
                 setConversations(response);
             })

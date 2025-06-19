@@ -57,5 +57,18 @@
         "agent": "Nhân viên",
         "select_chat_message": "Chọn một cuộc hội thoại để xem chi tiết"
     },
+    "crisp": {
+        "create_new": "Tạo mới",
+        "add_config": "Thêm mới cấu hình",
+        "identifier_code": "Mã định danh",
+        "key": "Khóa",
+        "config_info": "Thông tin cấu hình",
+        "config_list_info": "Danh sách key và website đã cấu hình",
+        "total_website": "Tổng số website",
+        "created_date": "Ngày tạo",
+        "action": "Thao tác",
+        "create_success": "Tạo mới khóa cấu hình thành công!",
+        "create_failed": "Lỗi! Tạo khóa không thành công"
+    },
     "notification": "Thông báo"
 }
