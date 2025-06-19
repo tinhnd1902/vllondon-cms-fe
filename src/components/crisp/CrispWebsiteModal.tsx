@@ -9,29 +9,27 @@ import Label from '../form/Label';
 import {Modal} from '../ui/modal';
 import "@/locales/i18n";
 import {useTranslation} from "react-i18next";
-import {CrispKeyPayload} from "@/modules/crisp/crisp.module";
+import {CrispWebsitePayload} from "@/modules/crisp/crisp.module";
 import {CrispModalState} from "@/components/crisp/CrispModalState";
 
 
 interface CrispModalProps {
-    onSubmit?: (payload: CrispKeyPayload) => void;
+    onSubmit?: (payload: CrispWebsitePayload) => void;
     state: CrispModalState
 }
 
-const CrispModal: React.FC<CrispModalProps> = ({
-                                                   onSubmit,
-                                                   state
-                                               }) => {
+const CrispWebsiteModal: React.FC<CrispModalProps> = ({
+                                                          onSubmit,
+                                                          state
+                                                      }) => {
     const {t} = useTranslation();
     const {isOpen, openModal, closeModal} = useModal();
 
-    const [formData, setFormData] = useState<CrispKeyPayload>({crispTokenIdentifier: "", crispTokenKey: ""});
+    const [formData, setFormData] = useState<CrispWebsitePayload>({websiteId: "", name: "", domain: ""});
 
     useEffect(() => {
-        if (state === CrispModalState.HIDDEN_CREATE) {
+        if (state === CrispModalState.HIDDEN_ADD_WEBSITE) {
             closeModal();
-        } else {
-            setFormData({crispTokenIdentifier: "", crispTokenKey: ""})
         }
     }, [state]);
 
@@ -55,7 +53,7 @@ const CrispModal: React.FC<CrispModalProps> = ({
             <Button className={"bg-green-400 hover:bg-green-500"} size="sm" variant="primary"
                     startIcon={<SquarePlusIcon/>}
                     onClick={openModal}
-            >{t("crisp.create_new")}</Button>
+            >{t("crisp.addWebsite")}</Button>
             <Modal
                 isOpen={isOpen}
                 onClose={closeModal}
@@ -63,28 +61,39 @@ const CrispModal: React.FC<CrispModalProps> = ({
             >
                 <form onSubmit={handleSubmit}>
                     <h4 className="mb-6 text-lg font-medium text-gray-800 dark:text-white/90">
-                        {t("crisp.add_config")}
+                        {t("crisp.addWebsiteToConfigKey")}
                     </h4>
 
                     <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
                         <div className="col-span-2">
-                            <Label>{t("crisp.identifier_code")}</Label>
+                            <Label>{t("crisp.name")}</Label>
                             <Input
                                 type="text"
-                                name='crispTokenIdentifier'
-                                placeholder={t("crisp.identifier_code")}
-                                defaultValue={formData?.crispTokenIdentifier}
+                                name='name'
+                                placeholder={t("crisp.enterName")}
+                                defaultValue={formData?.name}
                                 onChange={handleChange}
                             />
                         </div>
 
                         <div className="col-span-1 sm:col-span-2">
-                            <Label>{t("crisp.key")}</Label>
+                            <Label>{t("crisp.domain")}</Label>
                             <Input
                                 type="text"
-                                name='crispTokenKey'
-                                placeholder={t("crisp.key")}
-                                defaultValue={formData?.crispTokenKey}
+                                name='domain'
+                                placeholder={t("crisp.enterDomain")}
+                                defaultValue={formData?.domain}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="col-span-1 sm:col-span-2">
+                            <Label>{t("crisp.websiteId")}</Label>
+                            <Input
+                                type="text"
+                                name='websiteId'
+                                placeholder={t("crisp.enterWebsiteId")}
+                                defaultValue={formData?.websiteId}
                                 onChange={handleChange}
                             />
                         </div>
@@ -92,7 +101,7 @@ const CrispModal: React.FC<CrispModalProps> = ({
 
                     <div className="flex items-center justify-end w-full gap-3 mt-6">
                         <Button size="sm">
-                            {t("crisp.create_new")}
+                            {t("crisp.add")}
                         </Button>
                     </div>
                 </form>
@@ -101,4 +110,4 @@ const CrispModal: React.FC<CrispModalProps> = ({
     );
 }
 
-export default CrispModal;
+export default CrispWebsiteModal;

@@ -68,7 +68,26 @@
         "created_date": "Ngày tạo",
         "action": "Thao tác",
         "create_success": "Tạo mới khóa cấu hình thành công!",
-        "create_failed": "Lỗi! Tạo khóa không thành công"
+        "create_failed": "Lỗi! Tạo khóa không thành công",
+        "websites": "Các trang web",
+        "noData": "Không có dữ liệu",
+        "id": "ID",
+        "websiteId": "ID trang web",
+        "websiteName": "Tên trang web",
+        "url": "URL",
+        "websiteUrl": "URL trang web",
+        "detailInfo": "Thông tin chi tiết",
+        "identifierCode": "Mã định danh",
+        "addWebsite": "Thêm Website",
+        "addWebsiteToConfigKey": "Bổ sung Website theo Khóa cấu hình",
+        "name": "Tên",
+        "enterName": "Nhập tên",
+        "domain": "Miền",
+        "enterDomain": "Nhập tên miền",
+        "enterWebsiteId": "Nhập Website ID",
+        "add": "Thêm",
+        "add_website_success": "Thêm mới website vào key thành công!",
+        "add_website_failed": "Lỗi! Thêm mới website vào key: {{error}}"
     },
     "notification": "Thông báo"
 }

@@ -61,7 +61,26 @@
         "created_date": "Created Date",
         "action": "Action",
         "create_success": "Successfully created configuration key!",
-        "create_failed": "Error! Key creation failed"
+        "create_failed": "Error! Key creation failed",
+        "websites": "Websites",
+        "noData": "No data",
+        "id": "ID",
+        "websiteId": "Website ID",
+        "websiteName": "Website Name",
+        "url": "URL",
+        "websiteUrl": "Website URL",
+        "detailInfo": "Detail Information",
+        "identifierCode": "Identifier Code",
+        "addWebsite": "Add Website",
+        "addWebsiteToConfigKey": "Add Website to Configuration Key",
+        "name": "Name",
+        "enterName": "Enter name",
+        "domain": "Domain",
+        "enterDomain": "Enter domain",
+        "enterWebsiteId": "Enter Website ID",
+        "add": "Add",
+        "add_website_success": "Successfully added website to key!",
+        "add_website_failed": "Error! Failed to add website to key: {error}}"
     },
     "notification": "Notification"
 }

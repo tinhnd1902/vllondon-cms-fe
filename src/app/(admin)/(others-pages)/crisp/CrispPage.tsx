@@ -1,5 +1,5 @@
 "use client"
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import {
     Table,
     TableBodyLazy,
@@ -11,7 +11,7 @@ import {
 import Button from "@/components/ui/button/Button";
 import {ReloadIcon} from "@/assets/icons";
 import {useTranslation} from "react-i18next";
-import {CrispConfigResponse, CrispKeyPayload} from "@/modules/crisp/crisp.module";
+import {CrispConfigResponse, CrispKeyPayload, CrispWebsitePayload} from "@/modules/crisp/crisp.module";
 import CrispService from "@/services/crisp.service";
 import TotalPagination from "@/components/tables/TotalPagination";
 import {MetaResponse} from "@/modules/api/utils.module";
@@ -19,6 +19,7 @@ import CrispDetailModal from "@/components/crisp/CrispDetailModal";
 import CrispModal from "@/components/crisp/CrispModal";
 import Toast, {ToastInfo, ToastVariant} from '@/components/ui/toast/Toast';
 import {CrispModalState} from "@/components/crisp/CrispModalState";
+import CrispWebsiteModal from "@/components/crisp/CrispWebsiteModal";
 
 export default function CrispPage() {
     const [tableData, setTableData] = useState<CrispConfigResponse[]>([]);
@@ -30,10 +31,12 @@ export default function CrispPage() {
 
     useEffect(() => {
         fetchAllConfig();
-    }, []);
+    }, [meta.page, meta.limit]);
 
     const fetchAllConfig = () => {
         setTableStatus(TableStatus.LOADING);
+        setState(CrispModalState.NORMAL);
+        console.log(meta)
         CrispService.getAllCrisp(meta.page, meta.limit)
             .then((response) => {
                 setTableData(response.data);
@@ -67,6 +70,28 @@ export default function CrispPage() {
             });
     }
 
+    const onUpdateKey = (key: string, payload: CrispWebsitePayload) => {
+        CrispService.createSetWebsite(key, payload)
+            .then((response) => {
+                setState(CrispModalState.HIDDEN_ADD_WEBSITE);
+                setToastInfo({
+                    show: true,
+                    message: t("crisp.add_website_success"),
+                    variant: ToastVariant.SUCCESS
+                });
+                setTimeout(() => {
+                    fetchAllConfig();
+                }, 1000);
+            })
+            .catch((error) => {
+                setToastInfo({
+                    show: true,
+                    message: `${t("crisp.add_website_failed")} ${error.message}`,
+                    variant: ToastVariant.ERROR
+                });
+            });
+    }
+
     const getDateTime = (dateString: string) => {
         const date = new Date(dateString);
         return date.toLocaleDateString("vi-VN", {
@@ -74,15 +99,6 @@ export default function CrispPage() {
             month: "2-digit",
             day: "2-digit",
         });
-    }
-
-    const getURL = (url: string) => {
-        if (!url || url.trim() === "") {
-            return <span
-                className="font-medium text-gray-800 text-theme-sm dark:text-white/90">{t('source.no_url')}</span>;
-        }
-        return <a href={url} className="font-medium text-blue-500 text-theme-sm dark:text-blue-400"
-                  target="_blank">{url}</a>
     }
 
     return (
@@ -173,8 +189,10 @@ export default function CrispPage() {
                                                 <TableCell
                                                     className="px-4 py-3 w-3xs text-gray-500 text-theme-sm dark:text-gray-400">
                                                     <div className="flex gap-2">
-                                                        <CrispDetailModal isCreate={false} crisp={crisp}
-                                                                          onReload={fetchAllConfig}/>
+                                                        <CrispDetailModal crisp={crisp}/>
+                                                        <CrispWebsiteModal
+                                                            onSubmit={(payload) => onUpdateKey(crisp.id, payload)}
+                                                            state={state}/>
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

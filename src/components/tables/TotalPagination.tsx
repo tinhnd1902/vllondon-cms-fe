@@ -56,7 +56,7 @@ const TotalPagination: React.FC<PaginationProps> = ({
             </div>
             <div className="flex items-center ">
                 <Button
-                    className="mr-2.5 flex items-center h-10 justify-center rounded-lg border border-gray-300 bg-white px-3.5 py-2.5 text-gray-700 shadow-theme-xs hover:bg-gray-50 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] text-sm"
+                    className="mr-2.5 flex items-center justify-center rounded-lg border border-gray-300 bg-brand-300/[0.08] px-3.5 py-2.5 text-gray-700 shadow-theme-xs text-sm hover:bg-brand-200  h-10 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]"
                     startIcon={<PageLeftIcon/>}
                     onClick={() => onPageChange(currentPage - 1)}
                     disabled={currentPage === 1}
@@ -70,8 +70,8 @@ const TotalPagination: React.FC<PaginationProps> = ({
                             disabled={currentPage === page}
                             className={`px-4 py-2 rounded ${currentPage === page
                                 ? "disabled:bg-brand-500 disabled:text-white disabled:opacity-100 dark:disabled:hover:text-white"
-                                : "text-gray-700 dark:text-gray-400"
-                            } flex w-10 items-center justify-center h-10 rounded-lg text-sm font-medium hover:bg-blue-500/[0.08] hover:text-brand-500 dark:hover:text-brand-500`}
+                                : "text-gray-700 bg-gray-300 dark:text-gray-400 dark:bg-gray-800 "
+                            } flex w-10 items-center justify-center h-10 rounded-lg text-sm font-medium hover:bg-blue-500/[0.08] hover:text-brand-100 dark:hover:text-brand-500`}
                         >
                             {page}
                         </Button>
@@ -79,7 +79,7 @@ const TotalPagination: React.FC<PaginationProps> = ({
                     {currentPage < totalPages - 2 && <span className="px-2">...</span>}
                 </div>
                 <Button
-                    className="ml-2.5 flex items-center justify-center rounded-lg border border-gray-300 bg-white px-3.5 py-2.5 text-gray-700 shadow-theme-xs text-sm hover:bg-gray-50 h-10 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]"
+                    className="ml-2.5 flex items-center justify-center rounded-lg border border-gray-300 bg-brand-300/[0.08] px-3.5 py-2.5 text-gray-700 shadow-theme-xs text-sm hover:bg-brand-200  h-10 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]"
                     startIcon={<PageRightIcon/>}
                     onClick={() => onPageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}

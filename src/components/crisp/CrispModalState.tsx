@@ -1,6 +1,6 @@
 export enum CrispModalState {
     HIDDEN_VIEW,
     HIDDEN_CREATE,
-    HIDDEN_EDIT,
+    HIDDEN_ADD_WEBSITE,
     NORMAL
 }
