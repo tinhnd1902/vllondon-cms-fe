@@ -15,6 +15,7 @@ import GridIcon from "./grid.svg";
 import FileIcon from "./file.svg";
 import DownloadIcon from "./download.svg";
 import ArrowRightIcon from "./arrow-right.svg";
+import ArrowLeftIcon from "./arrow-left.svg";
 import GroupIcon from "./group.svg";
 import BoxIconLine from "./box-line.svg";
 import ShootingStarIcon from "./shooting-star.svg";
@@ -63,6 +64,9 @@ import ReportAnalyticsIcon from "./report-analytics.svg";
 import LucideIcon from "./lucide.svg";
 import LikeIcon from "./like.svg";
 import UplikeIcon from "./uplike.svg";
+import SettingsIcon from "./settings.svg";
+import PageLeftIcon from "./chevron-compact-left.svg";
+import PageRightIcon from "./chevron-compact-right.svg";
 
 export {
   DownloadIcon,
@@ -84,6 +88,7 @@ export {
   FolderIcon,
   ArrowDownIcon,
   ArrowRightIcon,
+  ArrowLeftIcon,
   GroupIcon,
   BoxIconLine,
   ShootingStarIcon,
@@ -129,5 +134,8 @@ export {
   ReportAnalyticsIcon,
   LucideIcon,
   LikeIcon,
-  UplikeIcon
+  UplikeIcon,
+  SettingsIcon,
+  PageRightIcon,
+  PageLeftIcon
 };
