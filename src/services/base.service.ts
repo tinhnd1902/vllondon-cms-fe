@@ -57,7 +57,6 @@ const GET = async <T>(url: string, params?: any) => {
         const response = await baseAxios.get<ApiResponse<T>>(`${url}`, params);
         return handlerResponse(response)
     } catch (err) {
-        console.log(err);
         throw new ApiErrorResponse(500, '[BaseService] --> GET: An error occurred', err);
     }
 }

@@ -1,18 +1,13 @@
 import {
-    ConversationResponse,
     CrispConfigResponse,
     CrispKeyPayload,
     CrispWebsitePayload, CrispWebsiteResponse
 } from '@/modules/crisp/crisp.module';
 import BaseAPI from './base.service';
 import {PaginatedResponse} from "@/modules/api/utils.module";
+import { BlockResponse, SessionResponse } from '@/modules/crisp/session.module';
 
 const PATH_URL = `api/crisp`;
-
-// Get all conversation
-const getAllConversation = async () => {
-    return BaseAPI.GET<ConversationResponse[]>(`${PATH_URL}/conversation`);
-}
 
 // Get all Crisp
 const getAllCrisp = async (page: number = 1, limit: number = 10) => {
@@ -29,11 +24,23 @@ const createSetWebsite = async (keyPair: string, payload: CrispWebsitePayload) =
     return BaseAPI.POST<CrispWebsiteResponse>(`${PATH_URL}/set-website/${keyPair}`, payload);
 }
 
+// Get all Session
+const getAllSessions = async (page: number = 1, limit: number = 10) => {
+    return BaseAPI.GET<PaginatedResponse<SessionResponse[]>>(`${PATH_URL}/session/all/${page}/${limit}`);
+}
+
+// Get all Block
+const getAllBlocks = async (page: number = 1, limit: number = 10) => {
+    return BaseAPI.GET<PaginatedResponse<BlockResponse[]>>(`${PATH_URL}/block/all/${page}/${limit}`);
+}
+
+
 const CrispService = {
-    getAllConversation,
     getAllCrisp,
     createSetKey,
-    createSetWebsite
+    createSetWebsite,
+    getAllSessions,
+    getAllBlocks
 };
 
 export default CrispService;
