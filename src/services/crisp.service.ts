@@ -30,8 +30,8 @@ const getAllSessions = async (page: number = 1, limit: number = 10) => {
 }
 
 // Get all Block
-const getAllBlocks = async (page: number = 1, limit: number = 10) => {
-    return BaseAPI.GET<PaginatedResponse<BlockResponse[]>>(`${PATH_URL}/block/all/${page}/${limit}`);
+const getAllBlocks = async (sessionId: string, page: number = 1, limit: number = 10) => {
+    return BaseAPI.GET<PaginatedResponse<BlockResponse[]>>(`${PATH_URL}/block/all/${sessionId}/${page}/${limit}`);
 }
 
 
