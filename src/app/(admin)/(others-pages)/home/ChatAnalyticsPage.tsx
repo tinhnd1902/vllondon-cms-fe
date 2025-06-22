@@ -39,7 +39,7 @@ export default function ChatAnalyticsPage() {
         { key: String(SentimentStatus.POSITIVE), value: t("chat_list_overview.satisfied") },
         { key: String(SentimentStatus.NEUTRAL), value: t("chat_list_overview.neutral") },
         { key: String(SentimentStatus.NEGATIVE), value: t("chat_list_overview.unsatisfied") },
-        { key: String(SentimentStatus.NONE), value: t("chat_list_overview.undefined") },
+        // { key: String(SentimentStatus.NONE), value: t("chat_list_overview.undefined") },
     ]
     const [selectedFilter, setSelectedFilter] = useState(levelOptions.at(0));
     const [selectedProduct, setSelectedProduct] = useState("");
