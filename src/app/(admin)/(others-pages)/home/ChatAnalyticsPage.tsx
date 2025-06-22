@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
-import { StatisticItem, StatisticsOverView, StatisticType } from "@/components/chat-analytics/StatisticsOverview";
+import { StatisticItem, StatisticsOverView } from "@/components/chat-analytics/StatisticsOverview";
 import CrispService from "@/services/crisp.service";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/ai/tabs";
 import {
@@ -28,9 +28,9 @@ export default function ChatAnalyticsPage() {
     const [statisticsTable, setStatisticsTable] = useState<StatisticsTableItem[]>([]);
 
     const [session, setSession] = useState<SessionResponse[]>([]);
-    const [metaSession, setMetaSession] = useState<MetaResponse>({ page: 1, totalPages: 1, total: 0, limit: 4 })
+    const [metaSession, setMetaSession] = useState<MetaResponse>({ page: 1, totalPages: 1, total: 0, limit: 5 })
     const [sessionSelected, setSessionSelected] = useState<SessionResponse | null>(null);
-    const META_BLOCK_DEFAULT = { page: 1, totalPages: 1, total: 0, limit: 2 };
+    const META_BLOCK_DEFAULT = { page: 1, totalPages: 1, total: 0, limit: 3 };
     const [metaBlock, setMetaBlock] = useState<MetaResponse>(META_BLOCK_DEFAULT);
     const [block, setBlock] = useState<BlockResponse[]>([]);
 

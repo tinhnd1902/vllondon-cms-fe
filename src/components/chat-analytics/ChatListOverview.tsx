@@ -173,7 +173,8 @@ const ChatListOverview: React.FC<ChatListOverviewProps> = (
                                         <span className="ml-2 text-gray-500">Loading...</span>
                                     </div>
                                 )}
-                                {dataBlock.map((block) => (
+                                {dataBlock.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+                                    .map((block) => (
                                     <div key={block.id} className="space-y-2">
                                         <div
                                             className="flex items-center justify-between text-sm dark:text-gray-400 text-gray-600 mt-5"
