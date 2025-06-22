@@ -36,10 +36,5 @@ out/
 .git
 .gitignore
 
-# Docker
-Dockerfile*
-docker-compose*
-.dockerignore
-
 # README
 README.md
