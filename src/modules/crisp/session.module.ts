@@ -65,3 +65,8 @@ export interface BlockResponse {
     priority: number;
     messages: MessageResponse[];
 }
+
+export interface BlockSearchPayload {
+    topic?: string;
+    sentiment?: string | null;
+}

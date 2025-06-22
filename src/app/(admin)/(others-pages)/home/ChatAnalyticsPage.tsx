@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { StatisticItem, StatisticsOverView } from "@/components/chat-analytics/StatisticsOverview";
 import CrispService from "@/services/crisp.service";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/ai/tabs";
@@ -15,9 +15,9 @@ import ChatListOverview from "@/components/chat-analytics/ChatListOverview";
 import { toast } from "@/hooks/use-toast";
 import StatisticsChart from "@/components/chat-analytics/StatisticsChart";
 import { useTranslation } from 'react-i18next';
-import {BlockResponse, SessionResponse} from "@/modules/crisp/session.module";
+import { BlockResponse, BlockSearchPayload, SessionResponse } from "@/modules/crisp/session.module";
 import { MetaResponse } from "@/modules/api/utils.module";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@radix-ui/react-select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/ai/select";
 import { Search } from "lucide-react";
 import Input from "@/components/form/input/InputField";
 import { SentimentStatus } from "@/modules/crisp/crisp.module";
@@ -35,16 +35,16 @@ export default function ChatAnalyticsPage() {
     const [block, setBlock] = useState<BlockResponse[]>([]);
 
     const levelOptions = [
-        {key: "all", value: t("chat_list_overview.all")},
-        {key: String(SentimentStatus.POSITIVE), value: t("chat_list_overview.satisfied")},
-        {key: String(SentimentStatus.NEUTRAL), value: t("chat_list_overview.neutral")},
-        {key: String(SentimentStatus.NEGATIVE), value: t("chat_list_overview.unsatisfied")},
-        {key: String(SentimentStatus.NONE), value: t("chat_list_overview.undefined")},
+        { key: "all", value: t("chat_list_overview.all") },
+        { key: String(SentimentStatus.POSITIVE), value: t("chat_list_overview.satisfied") },
+        { key: String(SentimentStatus.NEUTRAL), value: t("chat_list_overview.neutral") },
+        { key: String(SentimentStatus.NEGATIVE), value: t("chat_list_overview.unsatisfied") },
+        { key: String(SentimentStatus.NONE), value: t("chat_list_overview.undefined") },
     ]
     const [selectedFilter, setSelectedFilter] = useState(levelOptions.at(0));
-    const [selectedProduct, setSelectedProduct] = useState("all");
+    const [selectedProduct, setSelectedProduct] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    // const products = [...new Set(data.map(chat => chat.product))];
+    const searchTimeout = useRef<NodeJS.Timeout | null>(null);
 
     const satisfactionDistribution = [
         { name: "Hài lòng", value: 75, color: "#22c55e" },
@@ -52,8 +52,20 @@ export default function ChatAnalyticsPage() {
     ];
 
     useEffect(() => {
-        fetchAllSession();
-    }, [metaSession.page, metaSession.limit]);
+        if (searchTimeout.current) {
+            clearTimeout(searchTimeout.current);
+        }
+        if (searchTerm) {
+            searchTimeout.current = setTimeout(() => {
+                fetchAllSession();
+            }, 1000);
+        } else {
+            fetchAllSession();
+        }
+        return () => {
+            if (searchTimeout.current) clearTimeout(searchTimeout.current);
+        };
+    }, [selectedFilter, searchTerm, metaSession.page, metaSession.limit]);
 
     useEffect(() => {
         if (sessionSelected) {
@@ -62,78 +74,23 @@ export default function ChatAnalyticsPage() {
     }, [metaBlock.page, metaBlock.limit]);
 
     const updateStatisticOverview = useCallback(() => {
-        // const totalStatisfied = session.filter((res) => res.sentiment == SentimentStatus.POSITIVE).length;
-        // const totalNotStatisfied = session.filter((res) => res.sentiment == SentimentStatus.NEGATIVE).length;
-        // const totalNone = session.filter((res) => res.sentiment === null).length;
-        // const total = session.length;
-        // const data: StatisticItem[] = [
-        //     {
-        //         value: total.toString(),
-        //         type: StatisticType.TOTAL_CONVERSATION
-        //     },
-        //     {
-        //         value: totalStatisfied.toString(),
-        //         type: StatisticType.SATISFIED
-        //     },
-        //     {
-        //         value: totalNotStatisfied.toString(),
-        //         type: StatisticType.NOT_SATISFIED
-        //     },
-        //     {
-        //         value: `~${((+totalStatisfied / (+total - +totalNone)) * 100).toFixed(3).replace(/\.?0+$/, "")}%`,
-        //         type: StatisticType.SATISFACTION_RATE
-        //     }
-        // ]
-        // setStatisticOverview(data)
+        // ...existing code...
     }, [session]);
 
     const updateStatisticsTable = useCallback(() => {
-        // const data: StatisticsTableItem[] = session
-        //     .filter((res) => res.sentiment !== SentimentStatus.POSITIVE)
-        //     .map((res) => {
-        //         return {
-        //             id: res.id,
-        //             name: res.assigned.user_id,
-        //             total: 0,
-        //             totalNotSatisfied: 0,
-        //             dissatisfactionRate: `${res.sessionId}%`
-        //         }
-        //     })
-        // setStatisticsTable(data)
+        // ...existing code...
     }, [session]);
 
     const updateChatList = useCallback(() => {
-        // const data: Conversation[] = session
-        //     .map((res) => {
-        //         // let customer = `User${res.id}`;
-        //         let customer = `${res.assigned.user_id}`;
-        //         const messsages = res.metaData.map((chat) => {
-        //             let user = "";
-        //             if (chat.user && chat.from === ConversationForm.OPERATOR) {
-        //                 user = chat.user.nickname;
-        //             }
-        //             return {
-        //                 type: chat.type,
-        //                 user: user,
-        //                 sender: chat.from,
-        //                 content: chat.content,
-        //                 time: new Date(chat.timestamp).toLocaleTimeString()
-        //             }
-        //         })
-        //         return {
-        //             id: res.id,
-        //             customer: customer,
-        //             sentiment: res.sentiment || SentimentStatus.NONE,
-        //             product: res.conversationTopic || "SP None",
-        //             time: new Date(res.createdAt).toLocaleDateString(),
-        //             messages: messsages
-        //         }
-        //     })
-        // setChatList(data)
+        // ...existing code...
     }, [session]);
 
     const fetchAllSession = () => {
-        CrispService.getAllSessions(metaSession.page, metaSession.limit)
+        const search: BlockSearchPayload = {
+            sentiment: selectedFilter?.key === "all" ? null : selectedFilter?.key,
+            topic: searchTerm
+        }        
+        CrispService.getAllSessions(metaSession.page, metaSession.limit, search)
             .then((response) => {
                 setSession((prevState) => {
                     return metaSession.page === 1 ? response.data : [...prevState, ...response.data];
@@ -151,7 +108,7 @@ export default function ChatAnalyticsPage() {
 
     const fetchAllBlockBy = (session: SessionResponse) => {
         setSessionSelected(session);
-        CrispService.getAllBlocks(session.id, metaBlock.page, metaBlock.limit)
+        CrispService.getAllBlocks(session.sessionId, metaBlock.page, metaBlock.limit)
             .then((response) => {
                 setBlock((prevState) => {
                     return metaBlock.page === 1 ? response.data : [...response.data, ...prevState];
@@ -175,7 +132,9 @@ export default function ChatAnalyticsPage() {
     const onLoadMore = (isSession: boolean) => {
         if (isSession) {
             let page = metaSession.page + 1
-            if (page > metaSession.totalPages) { return }
+            if (page > metaSession.totalPages) {
+                return
+            }
             setMetaSession((prevState) => ({
                 ...prevState,
                 page: page
@@ -183,7 +142,9 @@ export default function ChatAnalyticsPage() {
             return;
         }
         let page = metaBlock.page + 1
-        if (page > metaBlock.totalPages) { return }
+        if (page > metaBlock.totalPages) {
+            return
+        }
         setMetaBlock((prevState) => ({
             ...prevState,
             page: page
@@ -206,12 +167,15 @@ export default function ChatAnalyticsPage() {
                 <ComponentCard title={t("chat_list_overview.filter_title")} titleSize="text-2xl">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
-                            <label className="text-sm text-gray-400 mb-2 block">{t("chat_list_overview.satisfaction_level")}</label>
+                            <label
+                                className="text-sm text-gray-400 mb-2 block">{t("chat_list_overview.satisfaction_level")}</label>
                             <Select value={selectedFilter?.key} onValueChange={(res) => {
-                                // setSelectedChat(null);
-                                setSelectedFilter(levelOptions.filter((item) => res === item.key).at(0))
+                                setSelectedFilter(levelOptions.filter((item) => res === item.key).at(0));
+                                // Reset page to 1 when filter changes
+                                setMetaSession((prev) => ({ ...prev, page: 1 }));
                             }}>
-                                <SelectTrigger className="dark:border-slate-600 dark:text-white dark:bg-gray-500 text-blue-500 forced-color-adjust-none">
+                                <SelectTrigger
+                                    className="dark:border-slate-600 dark:text-white dark:bg-gray-500 text-blue-500 forced-color-adjust-none">
                                     <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent className="dark:bg-gray-800 dark:text-gray-400 bg-white">
@@ -223,33 +187,16 @@ export default function ChatAnalyticsPage() {
                         </div>
 
                         <div>
-                            <label className="text-sm text-gray-400 mb-2 block">{t("chat_list_overview.product")}</label>
-                            <Select value={selectedProduct} onValueChange={(res) => {
-                                // setSelectedChat(null)
-                                setSelectedProduct(res)
-                            }}>
-                                <SelectTrigger className="dark:border-slate-600 dark:text-white dark:bg-gray-500 text-blue-500 forced-color-adjust-none">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent className="dark:bg-gray-800 dark:text-gray-400 bg-white">
-                                    <SelectItem value="all">{t("chat_list_overview.all_products")}</SelectItem>
-                                    {/*{products.map(product => (*/}
-                                    {/*    <SelectItem key={product} value={String(product)}>{product}</SelectItem>*/}
-                                    {/*))}*/}
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        <div>
                             <label className="text-sm text-gray-400 mb-2 block">{t("chat_list_overview.search")}</label>
                             <div className="relative ">
-                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 dark:text-white text-blue-500" />
+                                <Search
+                                    className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 dark:text-white text-blue-500" />
                                 <Input
                                     placeholder={t("chat_list_overview.search_placeholder")}
                                     defaultValue={searchTerm}
                                     onChange={(e) => {
-                                        // setSelectedChat(null)
-                                        setSearchTerm(e.target.value)
+                                        setSearchTerm(e.target.value);
+                                        setMetaSession((prev) => ({ ...prev, page: 1 }));
                                     }}
                                     className="pl-10 dark:border-slate-600 dark:text-white dark:bg-gray-500 bg-white text-blue-500"
                                 />
@@ -272,7 +219,8 @@ export default function ChatAnalyticsPage() {
 
                     <TabsContent value="chats"
                         className="space-y-6 mt-0 rounded-e-2xl rounded-b-2xl bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
-                        <ChatListOverview dataSession={session} dataBlock={block} onLoadMore={onLoadMore} onSelected={onSelectedSession}/>
+                        <ChatListOverview dataSession={session} dataBlock={block} onLoadMore={onLoadMore}
+                            onSelected={onSelectedSession} />
                     </TabsContent>
 
                     <TabsContent value="stats"

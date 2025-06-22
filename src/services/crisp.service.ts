@@ -5,7 +5,7 @@ import {
 } from '@/modules/crisp/crisp.module';
 import BaseAPI from './base.service';
 import {PaginatedResponse} from "@/modules/api/utils.module";
-import { BlockResponse, SessionResponse } from '@/modules/crisp/session.module';
+import {BlockResponse, BlockSearchPayload, SessionResponse} from '@/modules/crisp/session.module';
 
 const PATH_URL = `api/crisp`;
 
@@ -25,8 +25,8 @@ const createSetWebsite = async (keyPair: string, payload: CrispWebsitePayload) =
 }
 
 // Get all Session
-const getAllSessions = async (page: number = 1, limit: number = 10) => {
-    return BaseAPI.GET<PaginatedResponse<SessionResponse[]>>(`${PATH_URL}/session/all/${page}/${limit}`);
+const getAllSessions = async (page: number = 1, limit: number = 10, search: BlockSearchPayload) => {
+    return BaseAPI.GET<PaginatedResponse<SessionResponse[]>>(`${PATH_URL}/session/all/${page}/${limit}`, search);
 }
 
 // Get all Block
