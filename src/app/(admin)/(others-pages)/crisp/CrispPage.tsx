@@ -36,7 +36,6 @@ export default function CrispPage() {
     const fetchAllConfig = () => {
         setTableStatus(TableStatus.LOADING);
         setState(CrispModalState.NORMAL);
-        console.log(meta)
         CrispService.getAllCrisp(meta.page, meta.limit)
             .then((response) => {
                 setTableData(response.data);

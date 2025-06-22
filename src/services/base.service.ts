@@ -52,12 +52,24 @@ const handlerResponse = (response: any) => {
     throw new ApiErrorResponse(response.statusCode, response.message);
 }
 
+const buildUrlWithParams = (url: string, params?: Record<string, any>) => {
+    if (!params || Object.keys(params).length === 0) return url;
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== "") {
+            searchParams.append(key, String(value));
+        }
+    });
+    const queryString = searchParams.toString();
+    return queryString ? `${url}?${queryString}` : url;
+}
+
 const GET = async <T>(url: string, params?: any) => {
     try {
-        const response = await baseAxios.get<ApiResponse<T>>(`${url}`, params);
+        const fullUrl = buildUrlWithParams(url, params);        
+        const response = await baseAxios.get<ApiResponse<T>>(fullUrl);
         return handlerResponse(response)
     } catch (err) {
-        console.log(err);
         throw new ApiErrorResponse(500, '[BaseService] --> GET: An error occurred', err);
     }
 }
